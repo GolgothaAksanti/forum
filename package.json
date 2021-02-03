@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./",
-    "build": "babel src --out-dir dist",
     "start": "nodemon --exec babel-node server.js"
   },
   "repository": {
@@ -20,7 +19,9 @@
   },
   "homepage": "https://github.com/GolgothaAksanti/forum#readme",
   "dependencies": {
+    "@babel/register": "^7.12.10",
     "@hapi/joi": "^17.1.1",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -34,11 +35,12 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.0.0",
     "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-register": "^6.26.0",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
