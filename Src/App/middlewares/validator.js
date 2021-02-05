@@ -16,12 +16,28 @@ class Validator {
    * @memberof Validator
    */
   static async signup(req, res, next) {
-    const value = await schema.user.validate(req.body);
-    if (value.error) {
-      ResponseHandler.error(res, 402, value.error.message);
-    } else {
-      next();
+    const value = await schema.signup.validate(req.body);
+    if (!value.error) {
+      return next();
     }
+    ResponseHandler.error(res, 402, value.error.message);
+  }
+
+  /**
+   * create
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {object} data
+   * @memberof Validator
+   */
+  static async signin(req, res, next) {
+    const value = await schema.signin.validate(req.body);
+    if (!value.error) {
+      return next();
+    }
+    ResponseHandler.error(res, 402, value.error.message);
   }
 }
 

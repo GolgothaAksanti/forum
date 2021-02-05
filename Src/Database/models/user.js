@@ -1,42 +1,29 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-const { Model } = require('sequelize');
-
-module.exports = (sequelize, DataTypes) => {
-  /**
-   * @class User
-   */
-  class User extends Model {
-    /**
-     * associate
-     * @static
-     * @param {*} models
-     * @return {void}
-     * @memberof User
-     */
-    static associate(models) {
-      this.myAssociation = models.User.belongsTo(models.Post);
-    }
-  }
-
-  User.init(
+module.exports = (sequelize, Sequelize) => {
+  const User = sequelize.define(
+    'User',
     {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
-      password: DataTypes.STRING,
+      password: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
     },
     {
-      sequelize,
-      modelName: 'User',
+      tableName: 'user',
     },
+    {},
   );
   return User;
 };
