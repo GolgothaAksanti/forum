@@ -3,6 +3,7 @@
 /* eslint-disable valid-jsdoc */
 import ResponseHandler from '../helpers/responseHandler';
 import userRoutes from './auth';
+import JwtAuth from '../helpers/jwtHelper';
 
 const apiVersion = '/api/v1';
 /** @class MyRouter */
@@ -15,16 +16,16 @@ class MyRouter {
   static run(app) {
     app.use(apiVersion, userRoutes);
 
-    app.get(apiVersion, (req, res) => {
+    app.get(apiVersion, JwtAuth.verifyAccessToken, (req, res) => {
       ResponseHandler.ok(res, 200, 'Welcome to My forum');
     });
 
     app.all('/', (req, res) => {
-      ResponseHandler.ok(res, 401, 'Method is invalid');
+      ResponseHandler.error(res, 401, 'Method is invalid');
     });
 
     app.use('*', (req, res) => {
-      ResponseHandler.ok(res, 404, 'Route not found');
+      ResponseHandler.error(res, 404, 'Route not found');
     });
   }
 }

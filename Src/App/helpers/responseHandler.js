@@ -9,14 +9,15 @@ class ResponseHandler {
    * @static
    * @param {*} res
    * @param {*} code
+   * @param {*} message
    * @param {*} data
-   * @param {*} next
    * @returns {object} data
    * @memberof ResponseHandler
    */
-  static success(res, code, data, next) {
+  static success(res, code, message, data) {
     return res.status(code).json({
       status: code,
+      message,
       data,
     });
   }
@@ -49,7 +50,7 @@ class ResponseHandler {
   static ok(res, code, message) {
     return res.status(code).json({
       status: code,
-      message
+      message,
     });
   }
 }
