@@ -39,6 +39,23 @@ class Validator {
     }
     ResponseHandler.error(res, 402, value.error.message);
   }
+
+  /**
+   * createblog
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {object} data
+   * @memberof Validator
+   */
+  static async createBog(req, res, next) {
+    const value = await schema.createBlog.validate(req.body);
+    if (!value.error) {
+      return next();
+    }
+    ResponseHandler.error(res, 402, value.error.message);
+  }
 }
 
 export default Validator;

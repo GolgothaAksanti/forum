@@ -1,23 +1,22 @@
-/* eslint-disable no-unused-vars */
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('User', {
+module.exports = (sequelize, Sequelize) => {
+  const Blog = sequelize.define(
+    'Blog',
+    {
       id: {
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      username: {
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
+      description: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -29,9 +28,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    });
-  },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('User');
-  },
+    },
+    {
+      tableName: 'Blog',
+    },
+    {},
+  );
+  return Blog;
 };
