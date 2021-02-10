@@ -1,23 +1,21 @@
-/* eslint-disable no-unused-vars */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('User', {
+    await queryInterface.createTable('Blog', {
       id: {
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      username: {
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
+      description: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -31,7 +29,8 @@ module.exports = {
       },
     });
   },
+  // eslint-disable-next-line no-unused-vars
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('User');
+    await queryInterface.dropTable('Blog');
   },
 };

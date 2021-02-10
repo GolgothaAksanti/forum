@@ -11,6 +11,10 @@ const schema = {
     username: joi.string().required(),
     password: joi.string().required(),
   }),
+  createBlog: joi.object({
+    title: joi.string().required(),
+    description: joi.string().required(),
+  }),
 };
 
 export default schema;

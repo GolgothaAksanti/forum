@@ -92,13 +92,32 @@ class JwtAuth {
   /**
    * verifyRefreshToken
    * @param {*} refreshToken
-   * @return{Promise} promisi with the user id
+   * @return{Promise} promise with the user id
    */
   static verifyRefreshToken(refreshToken) {
     return new Promise((resolve, reject) => {
       JWT.verify(
         refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,
+        (err, payload) => {
+          if (err) return reject(err);
+          const userId = payload.aud;
+          resolve(userId);
+        },
+      );
+    });
+  }
+
+  /**
+   * getCurrentUserId
+   * @param {*} accessToken
+   * @return{Promise} promise with the user id
+   */
+  static getCurrentUserId(accessToken) {
+    return new Promise((resolve, reject) => {
+      JWT.verify(
+        accessToken,
+        process.env.ACCESS_TOKEN_SECRET,
         (err, payload) => {
           if (err) return reject(err);
           const userId = payload.aud;

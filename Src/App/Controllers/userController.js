@@ -9,6 +9,15 @@ import JwtAuth from '../helpers/jwtHelper';
  */
 class UserController {
   /**
+   * @constructor
+   * @param {*} currentUserId
+   * @memberof UserController
+   */
+  constructor(currentUserId) {
+    this.currentUserId = currentUserId;
+  }
+
+  /**
    * signup user in the database
    * @static
    * @param {*} req
@@ -65,14 +74,13 @@ class UserController {
 
       // generate token
       const token = await JwtAuth.signAccessToken(id);
-      const refreshToken = await JwtAuth.signRefreshToken(id);
+      // const refreshToken = await JwtAuth.signRefreshToken(id);
 
       if (addUser) {
         ResponseHandler.success(res, 201, 'User Created Successfully', {
           id,
           ...req.body,
           token,
-          refreshToken,
         });
       }
     } catch (e) {
@@ -112,13 +120,12 @@ class UserController {
 
       // generate token
       const token = await JwtAuth.signAccessToken(id);
-      const refreshToken = await JwtAuth.signRefreshToken(id);
+      // const refreshToken = await JwtAuth.signRefreshToken(id);
 
       ResponseHandler.success(res, 200, 'User successfully log in', {
         id,
         username,
         token,
-        refreshToken,
       });
     } catch (e) {
       ResponseHandler.error(res, 500, 'Please Try again later');

@@ -13,9 +13,6 @@
     "test:staged": "jest --findRelatedTests",
     "start": "nodemon --exec babel-node server.js"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GolgothaAksanti/forum.git"
@@ -29,6 +26,7 @@
   "dependencies": {
     "@babel/register": "^7.12.10",
     "@hapi/joi": "^17.1.1",
+    "axios": "^0.21.1",
     "babel-plugin-add-module-exports": "^1.0.4",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
