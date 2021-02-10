@@ -17,12 +17,12 @@ class BlogServices {
   /**
    * getAllP
    * @static
-   * @param {*}data
+   * @param {*}id
    * @return {*}data
    * @memberOf BlogServices
    */
-  static async getAllP(data) {
-    const res = await db.Blog.findAll(data);
+  static async getAllP(id) {
+    const res = await db.Blog.findAll({ where: { userId: id } });
     return res;
   }
 
