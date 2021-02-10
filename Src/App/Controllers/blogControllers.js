@@ -110,6 +110,54 @@ class BlogControllers {
       ResponseHandler.error(res, 400, error.message);
     }
   }
+
+  /**
+   * getSingleBlog in the database by userId
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {object} data
+   * @memberof BlogController
+   */
+  static async updateBlog(req, res, next) {
+    try {
+      // get the userId from the token
+      const userId = await ExtractToken.extractAccessToken(req, res, next);
+
+      // Get a blog Id from the parameters
+      const blogId = req.params.post_id;
+
+      const { title, description } = req.body;
+
+      const data = {
+        title,
+        description,
+      };
+      // update a blog
+      const result = await BlogServices.updateB(data, blogId);
+
+      if (!result) {
+        ResponseHandler.error(res, 400, 'Not found!');
+        return next();
+      }
+      // get the updated blog
+      const result1 = await BlogServices.getSingleB(blogId);
+
+      // remove createdAt property
+      const { updatedAt } = result1;
+
+      // return the response to the client
+      ResponseHandler.success(res, 200, 'Updated successfully', {
+        blogId,
+        userId,
+        ...req.body,
+        updatedAt,
+      });
+    } catch (error) {
+      ResponseHandler.error(res, 400, error.message);
+    }
+  }
 }
 
 export default BlogControllers;

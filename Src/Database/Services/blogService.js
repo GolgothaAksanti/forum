@@ -51,6 +51,19 @@ class BlogServices {
   }
 
   /**
+   * updateB for updating a single blog
+   * @static
+   * @param {*} data
+   * @param {*}blogId
+   * @return {*} data
+   * @memberOf BlogServices
+   */
+  static async updateB(data, blogId) {
+    const res = await db.Blog.update(data, { where: { id: blogId } });
+    return res;
+  }
+
+  /**
    * DeleteP
    * @static
    * @param {*}reqId
