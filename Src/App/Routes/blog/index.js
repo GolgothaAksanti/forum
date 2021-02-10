@@ -7,5 +7,6 @@ const blogRoutes = Router();
 
 blogRoutes.post('/blog/posts', Validator.createBog, BlogController.createBlog);
 blogRoutes.get('/blog/posts', BlogController.getAllBlog);
+blogRoutes.get('/blog/posts/:post_id', BlogController.getSingleBlog);
 
 export default blogRoutes;

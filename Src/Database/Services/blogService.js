@@ -27,7 +27,7 @@ class BlogServices {
   }
 
   /**
-   * getOneBlo
+   * getOneBlo for getting a blog id I can send to respond
    * @static
    * @param {*}reqTitle
    * @return {*} data
@@ -35,6 +35,18 @@ class BlogServices {
    */
   static async getOneBlog(reqTitle) {
     const res = await db.Blog.findOne({ where: { title: reqTitle } });
+    return res;
+  }
+
+  /**
+   * getSingleB for getting a single blog by its id from the params
+   * @static
+   * @param {*}blogId
+   * @return {*} data
+   * @memberOf BlogServices
+   */
+  static async getSingleB(blogId) {
+    const res = await db.Blog.findOne({ where: { id: blogId } });
     return res;
   }
 
