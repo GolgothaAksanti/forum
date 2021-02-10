@@ -158,6 +158,52 @@ class BlogControllers {
       ResponseHandler.error(res, 400, error.message);
     }
   }
+
+  /**
+   * deleteBlog in the database by userId
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {object} data
+   * @memberof BlogController
+   */
+  static async deleteBlog(req, res, next) {
+    try {
+      // get the userId from the token
+      const userId = await ExtractToken.extractAccessToken(req, res, next);
+
+      // Get a blog Id from the parameters
+      const blogId = req.params.post_id;
+
+      // get data before deleted
+      // get the updated blog
+      const result1 = await BlogServices.getSingleB(blogId);
+
+      const { title, description } = result1;
+      const data = {
+        title,
+        description,
+      };
+
+      const result = await BlogServices.deleteB(blogId);
+
+      if (!result) {
+        ResponseHandler.error(res, 400, 'Not found!');
+        return next();
+      }
+
+      // if there is no any blog registered with this userId
+      if (result === null) {
+        ResponseHandler.error(res, 400, 'error');
+      }
+
+      // return the response to the client
+      ResponseHandler.success(res, 200, '', { blogId, userId, ...data });
+    } catch (error) {
+      ResponseHandler.error(res, 400, error.message);
+    }
+  }
 }
 
 export default BlogControllers;
