@@ -71,7 +71,7 @@ class BlogServices {
    * @return {*} data
    * @memberOf BlogServices
    */
-  static async deleteP(reqId) {
+  static async deleteB(reqId) {
     const res = await db.Blog.destroy({ where: { id: reqId } });
     return res;
   }
