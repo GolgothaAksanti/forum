@@ -6,6 +6,6 @@ import Validator from '../../middlewares/validator';
 const blogRoutes = Router();
 
 blogRoutes.post('/blog/posts', Validator.createBog, BlogController.createBlog);
-// userRoutes.post('/auth/signin', Validator.signin, UserController.signin);
+blogRoutes.get('/blog/posts', BlogController.getAllBlog);
 
 export default blogRoutes;
