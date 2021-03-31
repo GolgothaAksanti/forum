@@ -7,10 +7,12 @@ const schema = {
     email: joi.string().email().required(),
     password: joi.string().required(),
   }),
+
   signin: joi.object({
     username: joi.string().required(),
     password: joi.string().required(),
   }),
+
   createBlog: joi.object({
     title: joi.string().required(),
     description: joi.string().required(),

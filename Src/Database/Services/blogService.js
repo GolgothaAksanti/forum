@@ -17,8 +17,8 @@ class BlogServices {
   /**
    * getAllP
    * @static
-   * @param {*}id
-   * @return {*}data
+   * @param {*} id
+   * @return {*} data
    * @memberOf BlogServices
    */
   static async getAllP(id) {
@@ -27,26 +27,39 @@ class BlogServices {
   }
 
   /**
-   * getOneBlo for getting a blog id I can send to respond
+   * getOneBlo get one by title
    * @static
-   * @param {*}reqTitle
+   * @param {*}title
    * @return {*} data
    * @memberOf BlogServices
    */
-  static async getOneBlog(reqTitle) {
-    const res = await db.Blog.findOne({ where: { title: reqTitle } });
+  static async getOneBlog(title) {
+    const res = await db.Blog.findOne({ where: { title } });
+    return res;
+  }
+
+  /**
+   * getOneBlogByTD get one by title and description
+   * @static
+   * @param {*} title
+   * @param {*} description
+   * @return {*} data
+   * @memberOf BlogServices
+   */
+  static async getOneBlogByTD(title, description) {
+    const res = await db.Blog.findOne({ where: { title, description } });
     return res;
   }
 
   /**
    * getSingleB for getting a single blog by its id from the params
    * @static
-   * @param {*}blogId
+   * @param {*} id
    * @return {*} data
    * @memberOf BlogServices
    */
-  static async getSingleB(blogId) {
-    const res = await db.Blog.findOne({ where: { id: blogId } });
+  static async getSingleB(id) {
+    const res = await db.Blog.findOne({ where: { id } });
     return res;
   }
 
@@ -54,25 +67,26 @@ class BlogServices {
    * updateB for updating a single blog
    * @static
    * @param {*} data
-   * @param {*}blogId
+   * @param {*} id
+   * @param {*} userId
    * @return {*} data
    * @memberOf BlogServices
    */
-  static async updateB(data, blogId) {
-    const res = await db.Blog.update(data, { where: { id: blogId } });
+  static async updateB(data, id, userId) {
+    const res = await db.Blog.update(data, { where: { id, userId } });
     return res;
   }
 
   /**
    * DeleteP
    * @static
-   * @param {*}reqId
-   * @param {*}newData
+   * @param {*} id
+   * @param {*} userId
    * @return {*} data
    * @memberOf BlogServices
    */
-  static async deleteB(reqId) {
-    const res = await db.Blog.destroy({ where: { id: reqId } });
+  static async deleteB(id, userId) {
+    const res = await db.Blog.destroy({ where: { id, userId } });
     return res;
   }
 }

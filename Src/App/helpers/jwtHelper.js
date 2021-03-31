@@ -50,14 +50,8 @@ class JwtAuth {
     const token = bearerToken[1];
     JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
       if (err) {
-        // if (err.name === 'JsonWebTokenError') {
-        //   ResponseHandler.error(res, 501, 'Access Denied');
-        // } else {
-        //   ResponseHandler.error(res, 501, err.message);
-        //   next();
-        // }
         const message = err.name === 'JsonWebTokenError' ? 'Access Denied' : err.message;
-        ResponseHandler.error(res, 501, message);
+        ResponseHandler.error(res, 500, message);
       }
       req.payload = payload;
       next();
@@ -92,7 +86,7 @@ class JwtAuth {
   /**
    * verifyRefreshToken
    * @param {*} refreshToken
-   * @return{Promise} promise with the user id
+   * @return {Promise} promise with the user id
    */
   static verifyRefreshToken(refreshToken) {
     return new Promise((resolve, reject) => {
@@ -111,7 +105,7 @@ class JwtAuth {
   /**
    * getCurrentUserId
    * @param {*} accessToken
-   * @return{Promise} promise with the user id
+   * @return {Promise} promise with the user id
    */
   static getCurrentUserId(accessToken) {
     return new Promise((resolve, reject) => {
