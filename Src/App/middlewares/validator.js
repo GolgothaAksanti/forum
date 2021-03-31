@@ -1,5 +1,4 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable no-console */
 import schema from '../helpers/userSchema';
 import ResponseHandler from '../helpers/responseHandler';
 /**

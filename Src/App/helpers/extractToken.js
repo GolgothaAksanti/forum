@@ -16,17 +16,19 @@ class ExtractToken {
   static async extractAccessToken(req, res, next) {
     const token = req.headers.authorization;
     if (!token) {
-      ResponseHandler.error(res, 404, 'Access Denied!');
+      ResponseHandler.error(res, 401, 'Unauthorized!');
       return next();
     }
 
     const extractToken = token.split(' ')[1];
     const userId = await JwtAuth.getCurrentUserId(extractToken);
+    // eslint-disable-next-line radix
+    const id = parseInt(userId);
     if (!userId) {
-      ResponseHandler.error(res, 404, 'Not Authorized!');
+      ResponseHandler.error(res, 401, 'Not Authorized!');
       return next();
     }
-    return userId;
+    return id;
   }
 }
 
