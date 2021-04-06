@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { Router } from 'express';
 import BlogController from '../../controllers/blogControllers';
 import Validator from '../../middlewares/validator';

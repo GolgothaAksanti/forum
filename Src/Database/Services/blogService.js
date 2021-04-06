@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import db from '../models';
 /** @class  */
 class BlogServices {

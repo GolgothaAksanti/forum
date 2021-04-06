@@ -1,5 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import UserServices from '../../database/services/userService';
 import ResponseHandler from '../helpers/responseHandler';
 import CryptPswd from '../helpers/utils';
@@ -20,16 +19,11 @@ class UserController {
   static async signup(req, res, next) {
     const reqUser = req.body.username;
     const reqEmail = req.body.email;
-    const emailExist = await UserServices.existEmail(reqEmail);
-    const userExist = await UserServices.existUser(reqUser);
 
-    if (emailExist) {
-      ResponseHandler.error(res, 409, 'User Already Exist with that email');
-      return next();
-    }
+    const userExist = await UserServices.userExist(reqEmail, reqUser);
 
     if (userExist) {
-      ResponseHandler.error(res, 409, 'User with username already exist');
+      ResponseHandler.error(res, 409, 'User Already Exists');
       return next();
     }
     const { username, email, password } = req.body;
@@ -52,13 +46,11 @@ class UserController {
 
     const token = await JwtAuth.signAccessToken(id);
 
-    if (addUser) {
-      ResponseHandler.success(res, 201, 'User Created Successfully', {
-        id,
-        ...req.body,
-        token,
-      });
-    }
+    ResponseHandler.success(res, 201, 'User Created Successfully', {
+      id,
+      ...req.body,
+      token,
+    });
   }
 
   /**
@@ -76,7 +68,7 @@ class UserController {
     const currentUser = await UserServices.signInUser(userSignin);
     if (!currentUser) {
       ResponseHandler.error(res, 404, 'User not found!');
-      next();
+      return next();
     }
 
     const pswdSignin = req.body.password;
@@ -86,13 +78,13 @@ class UserController {
     );
     if (!pswdMatch) {
       ResponseHandler.error(res, 404, 'Not found!');
-      next();
+      return next();
     }
     const { id, username } = currentUser;
 
     const token = await JwtAuth.signAccessToken(id);
 
-    ResponseHandler.success(res, 200, 'User successfully log in', {
+    ResponseHandler.success(res, 200, 'Success', {
       id,
       username,
       token,

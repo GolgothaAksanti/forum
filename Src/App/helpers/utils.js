@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import bcrypt from 'bcrypt';
 
 /**
@@ -15,14 +14,9 @@ class CryptPswd {
    * @memberOf CryptPswd
    */
   static async incryptPswd(pswdToHash) {
-    try {
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(pswdToHash, salt);
-      return hash;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.stdout.write(e.message());
-    }
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(pswdToHash, salt);
+    return hash;
   }
 
   /**
@@ -34,12 +28,8 @@ class CryptPswd {
    * @return {void}
    */
   static async comparePswd(reqPswd, resPswd) {
-    try {
-      return await bcrypt.compare(reqPswd, resPswd);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.stdout.write(error.message());
-    }
+    const psd = await bcrypt.compare(reqPswd, resPswd);
+    return psd;
   }
 }
 

@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 import ResponseHandler from '../helpers/responseHandler';
 import ExtractToken from '../helpers/extractToken';
@@ -29,14 +28,10 @@ class BlogControllers {
 
     if (blog) {
       ResponseHandler.error(res, 409, 'Already exist');
-      next();
+      return next();
     }
 
     const createdBlog = await BlogServices.createB(blogData);
-
-    if (!createdBlog) {
-      ResponseHandler.error(res, 403, 'Data not saved, Try again ...');
-    }
 
     delete createdBlog.updatedAt;
 
@@ -57,15 +52,7 @@ class BlogControllers {
 
     const result = await BlogServices.getAllP(userId);
 
-    if (!result) {
-      ResponseHandler.error(res, 404, 'Not found!');
-      next();
-    }
-
-    if (result === null) {
-      ResponseHandler.error(res, 404, 'You have no blog yet');
-    }
-    ResponseHandler.success(res, 200, '', result);
+    ResponseHandler.success(res, 200, 'Success', result);
   }
 
   /**
@@ -113,12 +100,13 @@ class BlogControllers {
       description,
     };
 
-    const result = await BlogServices.updateB(data, blogId, userId);
+    const blogExist = await BlogServices.getSingleB(blogId);
 
-    if (!result) {
-      ResponseHandler.error(res, 404, 'Not found!');
-      return next();
+    if (!blogExist) {
+      ResponseHandler.error(res, 404, 'Not Found!');
     }
+
+    const result = await BlogServices.updateB(data, blogId, userId);
 
     const result1 = await BlogServices.getOneBlog(title);
 
@@ -155,7 +143,7 @@ class BlogControllers {
       return next();
     }
 
-    ResponseHandler.ok(res, 200, 'Deleted');
+    ResponseHandler.success(res, 200, 'Deleted');
   }
 }
 

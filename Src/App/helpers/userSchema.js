@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import joi from 'joi';
 
 const schema = {

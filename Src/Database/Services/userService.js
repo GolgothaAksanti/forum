@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import db from '../models';
 /**
  * @class UserServices
@@ -16,29 +15,42 @@ class UserServices {
     return result;
   }
 
-  /**
-   * existEmail
-   * @static
-   * @param {*} reqEmail
-   * @returns {bolean} true
-   * @memberof UserServices
-   */
-  static async existEmail(reqEmail) {
-    const result = await db.User.findOne({ where: { email: reqEmail } });
-    return result;
-  }
+  // /**
+  //  * existEmail
+  //  * @static
+  //  * @param {*} reqEmail
+  //  * @returns {bolean} true
+  //  * @memberof UserServices
+  //  */
+  // static async existEmail(reqEmail) {
+  //   const result = await db.User.findOne({ where: { email: reqEmail } });
+  //   return result;
+  // }
 
   /**
    * existUser
    * @static
-   * @param {*} reqUser
+   * @param {*} email
+   * @param {*} username
    * @returns {bolean} true
    * @memberof UserServices
    */
-  static async existUser(reqUser) {
-    const result = await db.User.findOne({ where: { username: reqUser } });
+  static async userExist(email, username) {
+    const result = await db.User.findOne({ where: { email, username } });
     return result;
   }
+
+  // /**
+  //  * existUser
+  //  * @static
+  //  * @param {*} reqUser
+  //  * @returns {bolean} true
+  //  * @memberof UserServices
+  //  */
+  // static async existUser(reqUser) {
+  //   const result = await db.User.findOne({ where: { username: reqUser } });
+  //   return result;
+  // }
 
   /**
    * existUser

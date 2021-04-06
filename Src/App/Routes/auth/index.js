@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { Router } from 'express';
 import UserController from '../../controllers/userController';
 import Validator from '../../middlewares/validator';

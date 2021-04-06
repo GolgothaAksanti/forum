@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import ResponseHandler from '../helpers/responseHandler';
 import userRoutes from './auth';
 import blogRoutes from './blog';

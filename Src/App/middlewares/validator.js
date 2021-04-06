@@ -1,6 +1,5 @@
-/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
 import schema from '../helpers/userSchema';
-import ResponseHandler from '../helpers/responseHandler';
 /**
  * @class Validator
  */
@@ -16,10 +15,7 @@ class Validator {
    */
   static async signup(req, res, next) {
     const value = await schema.signup.validate(req.body);
-    if (!value.error) {
-      return next();
-    }
-    ResponseHandler.error(res, 402, value.error.message);
+    return next();
   }
 
   /**
@@ -33,10 +29,7 @@ class Validator {
    */
   static async signin(req, res, next) {
     const value = await schema.signin.validate(req.body);
-    if (!value.error) {
-      return next();
-    }
-    ResponseHandler.error(res, 402, value.error.message);
+    return next();
   }
 
   /**
@@ -50,10 +43,7 @@ class Validator {
    */
   static async createBog(req, res, next) {
     const value = await schema.createBlog.validate(req.body);
-    if (!value.error) {
-      return next();
-    }
-    ResponseHandler.error(res, 402, value.error.message);
+    return next();
   }
 }
 

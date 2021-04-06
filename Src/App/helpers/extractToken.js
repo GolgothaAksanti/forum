@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import JwtAuth from './jwtHelper';
 import ResponseHandler from './responseHandler';
 
@@ -24,10 +23,6 @@ class ExtractToken {
     const userId = await JwtAuth.getCurrentUserId(extractToken);
     // eslint-disable-next-line radix
     const id = parseInt(userId);
-    if (!userId) {
-      ResponseHandler.error(res, 401, 'Not Authorized!');
-      return next();
-    }
     return id;
   }
 }
