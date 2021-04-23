@@ -4,14 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "prestart": "env NODE_ENV=production",
+    "prestart": "cross-env NODE_ENV=production",
     "start": "nodemon dist/server.js",
     "automigrate": "npx sequelize db:migrate --env development",
     "build": "babel src --out-dir dist  --ignore src/extends/ --source-maps inline",
-    "pretest": "npm run db:drop:test && npm run db:create:test && env NODE_ENV=test npm run db:migrate",
+    "pretest": "cross-env NODE_ENV=test npm run db:migrate",
     "test": "jest --coverage --config=jest.config.js --runInBand --detectOpenHandles --forceExit",
     "test:whatch": "jest --watchAll",
-    "test:coverage": "jest --coverage --detectOpenHandles",
+    "coverage": "npm run pretest && jest --coverage --detectOpenHandles --forceExit && cat ./coverage/lcov.info | coveralls",
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "test:staged": "jest --findRelatedTests",
     "coveralls": "cat covarage/lcov.info | coveralls",
@@ -22,10 +22,10 @@
     "db:drop:test": "env NODE_ENV=test ./node_modules/.bin/sequelize db:drop",
     "db:migrate": "./node_modules/.bin/sequelize db:migrate",
     "db:migrate:reset": "./node_modules/.bin/sequelize db:migrate:undo:all",
-    "db:migrate:test": "env NODE_ENV=test npm run db:migrate",
+    "db:migrate:test": "cross-env NODE_ENV=test npm run db:migrate",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
-    "dev": "env NODE_ENV=development nodemon --exec babel-node src/server.js"
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/server.js"
   },
   "jest": {
     "collectCoverage": true
@@ -70,6 +70,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-register": "^6.26.0",
     "coveralls": "^3.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.1.0",

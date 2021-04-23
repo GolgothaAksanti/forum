@@ -130,3 +130,10 @@ describe('Blog Tests', () => {
       });
   });
 });
+
+afterAll(async () => {
+  await db.Blog.destroy({
+    where: {},
+    truncate: true,
+  })
+});

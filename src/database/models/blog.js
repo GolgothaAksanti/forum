@@ -3,10 +3,10 @@ module.exports = (sequelize, Sequelize) => {
     'Blog',
     {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -32,7 +32,6 @@ module.exports = (sequelize, Sequelize) => {
     {
       tableName: 'Blog',
     },
-    {},
   );
   return Blog;
 };
