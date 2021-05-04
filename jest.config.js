@@ -14,6 +14,8 @@ module.exports = {
     'node_modules',
     'coverage',
     'src/app.js',
+    'src/server.js',
+    'dist/',
     'src/models/index.js',
     'src/database/config/config.js',
     'src/database/models/index.js',
