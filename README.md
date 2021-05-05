@@ -175,10 +175,11 @@ then :point_down:
 ```
 ---
 ##### User Endpoints: /api/v1
-| Method | Endpoint  | Public | Action|
-|--------|-------------|--------|------|-------|
-| POST |/auth/signup|True  | User signup|
-|POST|/auth/signin| True| User signin|
+
+|Method | Endpoint | Public | Action |
+|--------|-------|--------|-----------|
+| POST | /auth/signup | True | User Signup |
+|POST | /auth/signin | True | User Signin |
 
 ---
 ##### Blog Endpoints: /api/v1
