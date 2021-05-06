@@ -1,7 +1,5 @@
 import 'dotenv/config';
-import app from './app/app';
-
-const PORT = process.env.PORT || 3000;
+import app, { PORT } from './app';
 
 app.listen(PORT, () => {
   process.stdout.write(`server listening on: http://localhost:${PORT}`);
