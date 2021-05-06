@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../../app/app';
+import app from '../../app';
 
 import db from '../../database/models';
 import { userData, userLoginData, wrongUser,wrongPswd } from '../mocks/dummyData';
